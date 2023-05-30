@@ -1,0 +1,11 @@
+{
+    "considerIp": "false",
+    "wifiAccessPoints": [
+      {
+        "macAddress": "20-16-D8-B4-F8-F0",
+        "signalStrength": -54,
+        "signalToNoiseRatio": 0
+      }
+    ]
+  }
+  

@@ -1,0 +1,339 @@
+@extends('layouts.app')
+@section('content')
+<?php
+$biaya = 0;
+if (isset($shipping->biaya)) {
+    $biaya = $shipping->biaya;
+}
+
+
+$biayaLain = 0;
+if (!empty($transaksi->biaya_ain)) {
+    $biayaLain = $transaksi->biaya_ain;
+}
+?>
+
+<style>
+    table tr td {
+        font-size: 12px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+
+            <h4 class="page-title">Detail Penawaran</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-header bg-transparent header-elements-inline">
+                    {{-- <h6 class="card-title">Faktur Penjualan</h6> --}}
+                    <div class="header-elements">
+                        <!-- <button type="button" class="btn btn-light btn-sm"><i class="fa fa-file mr-2"></i> Save</button> -->
+                        <button type="button" id="btnPrint" class="btn btn-light btn-sm ml-3"><i class="fa fa-print mr-2"></i> Print</button>
+                        <button type="button" id="btnPdf" class="btn btn-light btn-sm ml-3"><i class="fa fa-file-pdf-o mr-2"></i> PDF</button>
+                    </div>
+                </div>
+                <div class="print">
+                    @include('transaksi.invoiceHeader')
+                    <div style="width: 90%; margin: auto">
+                        <br>
+                        <table align="right" width="300">
+                            <tr>
+                                <td align="right">
+                                    <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 0; padding-bottom: 0;">PENAWARAN</h1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">{{str_replace('Kota','',website()->webkota->name)}}, {{tglIndo($quotation->tgl_dikeluarkan)}}</td>
+                            </tr>
+                            <tr>
+                                <td align="right">No Penawaran: {{$quotation->no_quo}}</td>
+                            </tr>
+                            <tr>
+                                <td align="right">Berlaku Sampai: {{tglIndo($quotation->tgl_kedaluwarsa)}}</td>
+                            </tr>
+                        </table>
+                        <br><br>
+                        <table width="400px" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td>Kepada Yth,</td>
+                            </tr>
+                            <tr>
+                                <td>{{$quotation->kepada}}</td>
+                            </tr>
+                            <tr>
+                                <td>Di</td>
+                            </tr>
+                            <tr>
+                                <td>{{$quotation->di}}</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <div style="text-indent: 1cm; width: 100%; word-wrap: break-word;">
+                            {!!strip_tags($quotation->pembuka)!!}
+                        </div>
+                        <br>
+                        {{-- <table border="1" width="100%" cellpadding="3" cellspacing="0">
+    <thead class="tableHeader">
+    <tr>
+        <td align="center">No</td>
+        <td align="center">Nama Produk</td>
+        <td align="center">Gambar</td>
+        <td align="center">Deskripsi</td>
+        <td align="center">Satuan</td>
+        <td align="center">Jumlah</td>
+        <td align="center">Harga Satuan</td>
+        <td align="center">Jasa Satuan</td>
+        <td align="center">Jumlah Harga</td>
+    </tr>
+</thead>
+<tbody class="tableItem">
+    @php
+    $totalJumlah=0;
+    $totalHarga=0;
+    $totalBiaya=0;
+    $totalJumlahHarga=0;
+    $total=0;
+    $grandTotal=0;
+    @endphp
+    @foreach($transaksi->stock_jenis as $index=>$item)
+    <tr>
+        <td align="center">{{$index+1}}</td>
+                        <td>{{$item->produk->nama_produk}}</td>
+                        @if(isset($pdf))
+                        <td align="center"><img src="{{public_path('image/produk/small/'.$item->produk->gambar_utama)}}" width="60px"></td>
+                        @else
+                        <td align="center"><img src="{{asset('image/produk/small/'.$item->produk->gambar_utama)}}" width="60px"></td>
+                        @endif
+                        <td>{!!strip_tags($item->produk->keterangan)!!}</td>
+                        <td align="center">{{$item->produk->satuan->name}}</td>
+                        <td align="center">{{$item->jumlah}}</td>
+                        <td align="right">Rp. {{ number_format((float) $item->harga_final-(float) $item->biaya, 0, ',', '.') }}</td>
+                        <td align="right">Rp. {{ number_format((float) $item->biaya, 0, ',', '.') }}</td>
+                        @php $jumlahHarga=$item->harga_final*$item->jumlah; @endphp
+                        <td align="right">Rp. {{ number_format($jumlahHarga, 0, ',', '.') }}</td>
+                        </tr>
+                        @php
+                        $totalJumlah+=$item->jumlah;
+                        $totalHarga+=$item->harga_final-$item->biaya;
+                        $totalBiaya+=$item->biaya;
+                        $totalJumlahHarga+=$jumlahHarga;
+                        @endphp
+
+                        @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">Sub Total</td>
+                                <td align="center">{{$totalJumlah}}</td>
+                                <td align="right">Rp. {{ number_format($totalHarga, 0, ',', '.') }}</td>
+                                <td align="right">Rp. {{ number_format($totalBiaya, 0, ',', '.') }}</td>
+                                <td align="right">Rp. {{ number_format($totalJumlahHarga, 0, ',', '.') }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="8">PPN {{website()->trx_ppn}}%</td>
+                                <td align="right">Rp. {{ number_format($transaksi->ppn, 0, ',', '.') }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="8">Total</td>
+                                <td align="right">
+                                    @php
+                                    $total=$totalJumlahHarga+$transaksi->ppn;
+                                    @endphp
+                                    Rp. {{ number_format($total, 0, ',', '.') }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="8">PPH {{website()->trx_pph}}%</td>
+                                <td align="right">Rp. - {{ number_format($transaksi->pph, 0, ',', '.') }}</td>
+                            </tr>
+                            @if($biaya)
+                            <tr>
+                                <td colspan="8">Biaya Kirim:</td>
+                                <td align="right">Rp.
+                                    {{ number_format($biaya, 0, ',', '.') }}
+                                </td>
+                            </tr>
+                            @endif
+                            <tr>
+                                <td colspan="8">Grand Total</td>
+                                <td align="right">
+                                    @php
+                                    $grandTotal=$total-$transaksi->pph;
+                                    @endphp
+                                    Rp. {{ number_format($grandTotal, 0, ',', '.') }}</td>
+                            </tr>
+                        </tfoot>
+                        </table> --}}
+                        <table class="table table-bordered table-stiped" border="1" width="100%" cellpadding="3" cellspacing="0">
+                            <thead class="tableHeader">
+                                <tr>
+                                    <td align="center">No</td>
+                                    <td width="200px" align="center">Nama Produk</td>
+                                    <td align="center">Gambar</td>
+                                    <td width="300px" align="center">Deskripsi</td>
+                                    <td align="center">Satuan</td>
+                                    <td align="center">Jumlah</td>
+                                    <td align="center">Harga Satuan</td>
+                                    <td align="center">Jasa Satuan</td>
+                                    <td align="center">Jumlah Harga</td>
+                                </tr>
+                            </thead>
+                            <tbody class="tableItem">
+                                @php
+                                $totalJumlah = 0;
+                                $totalHarga = 0;
+                                $totalBiaya = 0;
+                                $totalJumlahHarga = 0;
+                                $total = 0;
+                                $grandTotal = 0;
+                                @endphp
+                                @foreach ($transaksi->stock_jenis as $index => $item)
+                                <tr>
+                                    <td align="center">{{ $index + 1 }}</td>
+                                    <td>{{ $item->produk->nama_produk }}</td>
+                                    @if (isset($pdf))
+                                    <td align="center"><img src="{{ public_path('image/produk/small/' . $item->produk->gambar_utama) }}" width="60px"></td>
+                                    @else
+                                    <td align="center"><img src="{{ asset('image/produk/small/' . $item->produk->gambar_utama) }}" width="60px"></td>
+                                    @endif
+                                    <td>{!! $item->produk->deskripsi !!}</td>
+                                    <td align="center">{{ $item->produk->satuan->name }}</td>
+                                    <td align="center">{{ $item->jumlah }}</td>
+                                    <td align="right">Rp.
+                                        {{ number_format((float) $item->harga_final - (float) $item->biaya, 0, ',', '.') }}
+                                    </td>
+                                    <td align="right">Rp.
+                                        {{ number_format((float) $item->biaya, 0, ',', '.') }}
+                                    </td>
+                                    @php $jumlahHarga=$item->harga_final*$item->jumlah; @endphp
+                                    <td align="right">Rp. {{ number_format($jumlahHarga, 0, ',', '.') }}
+                                    </td>
+                                </tr>
+                                @php
+                                $totalJumlah += $item->jumlah;
+                                $totalHarga += $item->harga_final - $item->biaya;
+                                $totalBiaya += $item->biaya;
+                                $totalJumlahHarga += $jumlahHarga;
+                                @endphp
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2" class="colBold">Sub Total</td>
+                                    <td colspan="3"></td>
+                                    <td align="center" class="colBold">{{ $totalJumlah }}</td>
+                                    <td align="right" class="colBold">Rp.
+                                        {{ number_format($totalHarga, 0, ',', '.') }}
+                                    </td>
+                                    <td align="right" class="colBold">Rp.
+                                        {{ number_format($totalBiaya, 0, ',', '.') }}
+                                    </td>
+                                    <td align="right" class="colBold">Rp.
+                                        {{ number_format($totalJumlahHarga, 0, ',', '.') }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="colBold">PPN {{ website()->trx_ppn }}%</td>
+                                    <td colspan="7" align="right" class="colBold">Rp.
+                                        {{ number_format($transaksi->ppn, 0, ',', '.') }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="colBold">Total</td>
+                                    <td colspan="7" align="right" class="colBold">
+                                        @php
+                                        $total = $totalJumlahHarga + $transaksi->ppn;
+                                        @endphp
+                                        Rp. {{ number_format($total, 0, ',', '.') }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="colBold">PPH {{ website()->trx_pph }}%</td>
+                                    <td colspan="7" align="right" class="colBold">Rp. -
+                                        {{ number_format($transaksi->pph, 0, ',', '.') }}
+                                    </td>
+                                </tr>
+                                @if ($biaya)
+                                <tr>
+                                    <td colspan="2" class="colBold">Biaya Kirim:</td>
+                                    <td colspan="7" align="right" class="colBold">Rp.
+                                        {{ number_format($biaya, 0, ',', '.') }}
+                                    </td>
+                                </tr>
+                                @endif
+                                @if (!empty($biayaLain))
+                                <tr>
+                                    <td colspan="2" class="colBold">Biaya Lainnya:</td>
+                                    <td colspan="7" align="right" class="colBold">Rp.
+                                        {{ number_format($biayaLain, 0, ',', '.') }}
+                                    </td>
+                                </tr>
+                                @endif
+                                <tr>
+                                    <td colspan="2" class="colBold">Grand Total</td>
+                                    <td colspan="7" align="right" class="colBold">
+                                        @php
+                                        $grandTotal = $total + $biaya+$biayaLain - $transaksi->pph;
+                                        @endphp
+                                        Rp. {{ number_format($grandTotal, 0, ',', '.') }}</td>
+                                </tr>
+
+                            </tfoot>
+                        </table>
+                        <div style="text-indent: 1cm; width: 100%; word-wrap: break-word;">
+                            {!!strip_tags($quotation->penutup)!!}
+                        </div>
+                        <br><br>
+                        <table border="0" width="100%" align="center" cellpadding="3" cellspacing="0">
+                            <tr>
+                                <td width="50%" align="center"></td>
+                                <td width="50%" align="center">
+                                    Hormat Kami,<br><br>
+                                    <img src="{{asset('image/website/'.website()->icon)}}" width="80px" alt=""><br><br>
+                                    {{website()->nama_website}}
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <br><br>
+                    <div style="width: 100%; position: relative; bottom: 0">
+                        <div style="border-bottom: 2px solid gold;">
+
+                        </div>
+                    </div>
+                    @if(!empty($quotation->catatan))
+                    <b>Catatan :</b>
+                    <table border="0" width="100%" align="center" cellpadding="3" cellspacing="0">
+                        <tr>
+                            <td width="50%" align="left" style="word-wrap: break-word;">
+                                {!! strip_tags($quotation->catatan) !!}
+                            </td>
+                        </tr>
+                    </table>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ asset('printThis/printThis.js') }}"></script>
+<script>
+    $("#btnPrint").click(function() {
+        url = "{{ url('/quotation/detail') }}" + "/{{ $quotation->no_quo }}" + "?print=true";
+        window.location.href = url
+    })
+
+    $("#btnPdf").click(function() {
+        url = "{{ url('/quotation/detail') }}" + "/{{ $quotation->no_quo }}" + "?pdf=true";
+        window.location.href = url
+    })
+</script>
+@endsection

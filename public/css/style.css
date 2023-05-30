@@ -1,0 +1,178 @@
+﻿#MainWrapper{
+	box-shadow: 5px 5px 15px grey;
+	margin-top: 25px;
+	padding-top: 5px;
+}
+ul.productContainer>li {
+    float: left;
+    list-style: none;
+}
+.clear-both
+{
+	clear:both;
+}
+#footerElement li {
+    list-style: none;
+}
+
+#footerElement {
+    background-color: #206a82;
+}
+
+#footerElement a {
+    color: white;
+}
+
+#footerElement {
+    color: white;
+}
+
+ul.social {
+    text-align: center;
+}
+
+li.ImageBlock {
+    height: 330px;
+}
+
+.ProductImage {
+    height: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.ProductImageMain {
+    height: 250px;
+}
+
+span.PriceIndex2, span.PriceSpecial2, span.PriceDiscountOff2{
+    color: red;
+    font-size: 100%;
+}
+span.PriceNormal2 {
+	text-decoration-line: line-through;
+	font-size: 100%;
+}
+
+span.PriceIndex, span.PriceSpecial, span.PriceDiscountOff{
+    color: red;
+    font-size: 150%;
+}
+span.PriceNormal {
+	text-decoration-line: line-through;
+	font-size: 150%;
+}
+#RelatedProducts {
+	padding-top:20px;
+}
+
+div#Currency {
+    float: left;
+}
+
+div#ShoppingCart {
+    float: left;
+}
+
+.dosearch, #dosearch{
+	background:white;
+	color:black;
+}
+
+.showless433{
+	display:none;
+}
+
+.dosearch:hover, #dosearch:hover{
+	background:black;
+	color:white;
+}
+
+#headMenuNav i{
+	color: black;
+}
+
+div#ReviewsList i {
+    color: orange;
+}
+
+@media screen and (max-width: 432px) {
+	div#HeadSearch, div#MainWrapper, #RelatedProducts, div#RelatedProducts div.panel-body, div#productDetailDIV, li.ImageBlock, div.ProductInfo, div#productMainImage{
+	    padding-left: 0;
+	    padding-right: 0;
+	    margin-left: 0;
+	    margin-right: 0;
+	}
+	div#headSearchDIV{
+		display:none;
+	}
+	
+	.ProductImage {
+	    height: auto;
+	}
+
+	li.ImageBlock {
+	    height: auto;
+	}
+	
+	.showless433{
+		display: block !important;
+	}
+	
+	.hideless433{
+		display:none !important;
+	}
+	
+	ul.productContainer{
+		padding-inline-start: 0px;
+	}
+	
+	div#BreadCrumb ul.breadcrumb{
+		margin-bottom: 0;
+	}
+	
+	div#MainWrapper nav.navbar{
+		margin-bottom: 0;
+	}
+	#MainWrapper{
+		margin-top:52px;
+		padding-top:0px;
+		box-shadow: none;
+	}
+	
+	div#currencyDIV{
+		display:none;
+	}
+	
+	.ProductImageMain {
+	    height: auto;
+	}
+	
+	.ProductImageMain img.img-responsive{
+		width: 290px;
+	}
+	
+	.productNameInList>a{
+		color: black;
+	}
+	.productNameInList:hover>a{
+		color: red;
+	}
+	
+	div#ProductDescription{
+		margin-top:10px;
+	}
+	
+	#headMenuNav {
+		position: absolute;
+    z-index: 9999;
+    top: 0 !important;
+    left: 0;
+    width: 100%;
+	}
+	
+	#headMenuButton{
+		float:left;
+	}
+}
