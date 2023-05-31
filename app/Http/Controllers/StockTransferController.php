@@ -469,9 +469,9 @@ class StockTransferController extends Controller
                     'mimes' => 'Ekstensi Diizinkan jpg,jpeg,zip,rar,pdf'
                 ]);
                 $filename = 'kirim' . time() . '.' . $request->file->extension();
-                $request->file->move(public_path('image/transfer-stock/kirim'), $filename);
+                $request->file->move(public_path('image/transfer-stock/terima'), $filename);
             } else {
-                return redirect()->back()->with('alert', 'Silahkan Upload Bukti Kirim');
+                return redirect()->back()->with('alert', 'Silahkan Upload Bukti Terima Barang');
             }
             $this->validTerima($data->nomor);
             $data->update(['status_order' => 'selesai', 'file_terima' => $filename]);
