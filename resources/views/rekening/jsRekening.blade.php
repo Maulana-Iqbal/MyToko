@@ -128,13 +128,9 @@
             }
         });
 
-        $('.select2').select2({
-            dropdownParent: $('#ajaxModel  .modal-body')
-        });
-
 
         $("#akun").select2({
-            placeholderOption: 'Pilih Akun',
+            placeholder: 'Pilih Akun',
             allowClear: true,
             dropdownParent: $('#ajaxModel .modal-body'),
             ajax: {
@@ -159,34 +155,17 @@
         });
 
 
-        function getAkun(id = '') {
-            $.ajax({
-                url: "/akun/select",
-                type: "post",
-                dataType: 'json',
-                success: function(params) {
-                    $('#akun').empty();
-                    $("#akun").select2({
-            dropdownParent: $('#ajaxModel .modal-body'),
-                        allowClear: true,
-                        // dropdownParent: $('#newPelanggan .modal-body'),
-                        //    _token: CSRF_TOKEN,
-                        data: params // search term
-                    });
-                    $("#akun").select2("trigger", "select", {
-                        data: {
-                            id: id
-                        }
-                    });
-                },
-            });
-        }
-
 
         $('#createNewRekening').click(function() {
             $('#saveBtn').html("Simpan");
             $('#id_rekening').val('');
             $('#rekeningForm').trigger("reset");
+            $("#akun").select2("trigger", "select", {
+                data: {
+                    id: '',
+                    text: ''
+                }
+            });
             $('#modelHeading').html("Tambah Rekening ");
             $('#ajaxModel').modal('show');
         });
@@ -254,7 +233,12 @@
         });
 
         $('body').on('click', '.editRekening', function() {
-
+            $("#akun").select2("trigger", "select", {
+                data: {
+                    id: '',
+                    text: ''
+                }
+            });
             var id_rekening = $(this).data('id_rekening');
             $("#canvasloading").show();
             $("#loading").show();
@@ -270,8 +254,12 @@
                 $('#no_rek').val(data.no_rek);
                 $('#jenis_rek').val(data.jenis_rek);
                 $('#isActive').val(data.isActive);
-
-        getAkun(data.akun_id);
+                $("#akun").select2("trigger", "select", {
+                    data: {
+                        id: data.akun_id,
+                        text: data.akun.name
+                    }
+                });
             })
 
         });

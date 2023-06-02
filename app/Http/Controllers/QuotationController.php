@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quotation;
-use App\Models\Kas;
-use App\Models\Notifikasi;
 use App\Models\Shipping;
-use App\Models\Transaksi;
-use App\Models\User;
 use App\Repositori\QuotationRepositori;
 use App\Repositori\StockOrderRepositori;
 use App\Repositori\TransaksiRepositori;
@@ -28,6 +24,10 @@ class QuotationController extends Controller
         $this->stockOrderRepo = new StockOrderRepositori();
         $this->quotationRepo = new QuotationRepositori();
         $this->transaksiRepo = new TransaksiRepositori();
+        $this->middleware('permission:quotation|quotation-list|quotation-create|quotation-edit|quotation-delete|quotation-laporan', ['only' => ['index', 'show']]);
+        $this->middleware('permission:quotation|quotation-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:quotation|quotation-edit', ['only' => ['edit', 'store']]);
+        $this->middleware('permission:quotation|quotation-delete', ['only' => ['destroy']]);
     }
 
     public function index(Request $request)
@@ -113,7 +113,7 @@ class QuotationController extends Controller
         $quotation = $this->quotationRepo->getId($id);
         $transaksi = $this->stockOrderRepo->getWhere(['nomor' => $quotation->kode_trans])->first();
         $data["email"] = $transaksi->pelanggan->email;
-        $data["title"] = 'Surat Penawaran';
+        $data["title"] = 'Penawaran';
         // $data["body"] = $body;
 
         $files = [

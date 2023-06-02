@@ -99,12 +99,6 @@
                         name: 'status_order'
                     },
                     {
-                        data: 'deskripsi',
-                        name: 'deskripsi',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
                         data: 'toko',
                         name: 'toko'
                     },

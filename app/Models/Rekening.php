@@ -40,4 +40,8 @@ class Rekening extends Model
     public function pengeluaran(){
        return $this->hasMany(Pengeluaran::class);
     }
+
+    public function akun(){
+        return $this->belongsTo(Akun::class);
+    }
 }

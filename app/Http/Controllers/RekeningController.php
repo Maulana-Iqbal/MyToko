@@ -66,7 +66,7 @@ class RekeningController extends Controller
     public function edit($id)
     {
         $id = dec($id);
-        $rekening = $this->rekeningRepo->getId($id);
+        $rekening = $this->rekeningRepo->getWhere(['id'=>$id])->with('akun')->first();
         return response()->json($rekening);
     }
 

@@ -43,6 +43,7 @@ class PemasokService
                 'alamat' => 'required',
                 'aktif' => 'required',
                 'email' => 'required',
+                'perusahaan' => 'required',
                 'telepon' => 'required',
             ],
             [

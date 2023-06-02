@@ -7,6 +7,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckOngkirController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HariKerjaController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\KasirController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\PresentsController;
 use App\Http\Controllers\RoleController;
@@ -101,6 +103,16 @@ Route::group(['middleware' => ['auth', 'ceklevel:SUPERADMIN,SUPERCEO,ADMIN,CEO,S
     Route::post('/permission/select', [App\Http\Controllers\PermissionController::class, 'select']);
 
 
+    Route::get('/slide', [App\Http\Controllers\SlideController::class, 'index']);
+    Route::post('/slideTable', [App\Http\Controllers\SlideController::class, 'index']);
+    Route::post('/slide/simpan', [App\Http\Controllers\SlideController::class, 'store']);
+    Route::get('/slide/{id}/edit', [App\Http\Controllers\SlideController::class, 'edit']);
+    Route::post('/slideTableTrash', [App\Http\Controllers\SlideController::class, 'trashTable']);
+    Route::get('/slide-trash/{id}', [App\Http\Controllers\SlideController::class, 'trash']);
+    Route::get('/slide-delete/{id}', [App\Http\Controllers\SlideController::class, 'delete']);
+    Route::get('/slide-restore/{id}', [App\Http\Controllers\SlideController::class, 'restore']);
+    Route::get('/slide/bulk-delete', [App\Http\Controllers\SlideController::class, 'bulkDelete']);
+
     //Satuan
     Route::get('/satuan', [App\Http\Controllers\SatuanController::class, 'index']);
     Route::post('/satuanTable', [App\Http\Controllers\SatuanController::class, 'index']);
@@ -150,7 +162,26 @@ Route::group(['middleware' => ['auth', 'ceklevel:SUPERADMIN,SUPERCEO,ADMIN,CEO,S
     Route::get('/kasBank/bulk-delete', [App\Http\Controllers\KasBankController::class, 'bulkDelete']);
     Route::post('/kasBank/select', [App\Http\Controllers\KasBankController::class, 'select']);
 
-   
+    //Pekerjaan
+    Route::get('/pekerjaan', [App\Http\Controllers\PekerjaanController::class, 'index']);
+    Route::post('/pekerjaanTable', [App\Http\Controllers\PekerjaanController::class, 'index']);
+    Route::post('/pekerjaan/simpan', [App\Http\Controllers\PekerjaanController::class, 'store']);
+    Route::get('/pekerjaan/{id}/edit', [App\Http\Controllers\PekerjaanController::class, 'edit']);
+    Route::post('/pekerjaanTableTrash', [App\Http\Controllers\PekerjaanController::class, 'trashTable']);
+    Route::get('/pekerjaan-trash/{id}', [App\Http\Controllers\PekerjaanController::class, 'trash']);
+    Route::get('/pekerjaan-delete/{id}', [App\Http\Controllers\PekerjaanController::class, 'delete']);
+    Route::get('/pekerjaan-restore/{id}', [App\Http\Controllers\PekerjaanController::class, 'restore']);
+    Route::get('/pekerjaan/bulk-delete', [App\Http\Controllers\PekerjaanController::class, 'bulkDelete']);
+    Route::post('/pekerjaan/select', [App\Http\Controllers\PekerjaanController::class, 'select']);
+
+    Route::get('/upah', [App\Http\Controllers\UpahController::class, 'index']);
+    Route::post('/upahTable', [App\Http\Controllers\UpahController::class, 'index']);
+    Route::post('/upah/simpan', [App\Http\Controllers\UpahController::class, 'store']);
+    Route::delete('/upah/{id}', [App\Http\Controllers\UpahController::class, 'destroy']);
+    Route::get('/upah/{id}/edit', [App\Http\Controllers\UpahController::class, 'edit']);
+    Route::get('/laporan-upah', [App\Http\Controllers\LaporanController::class, 'view_laporan_upah']);
+    Route::get('/print-laporan-upah', [App\Http\Controllers\LaporanController::class, 'print_laporan_upah']);
+
     //Rekening
     Route::get('/rekening', [App\Http\Controllers\RekeningController::class, 'index']);
     Route::post('/rekeningTable', [App\Http\Controllers\RekeningController::class, 'index']);
@@ -225,6 +256,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:SUPERADMIN,SUPERCEO,ADMIN,CEO,S
     Route::get('/transaksi/baru', [App\Http\Controllers\TransaksiController::class, 'baru']);
     Route::get('/transaksi/ubah/{id}', [App\Http\Controllers\TransaksiController::class, 'ubah']);
     Route::post('/transaksi/update', [App\Http\Controllers\TransaksiController::class, 'update']);
+    Route::post('/transaksi/no/select', [App\Http\Controllers\TransaksiController::class, 'noSelect']);
 
     Route::get('/addcart/{id}', [App\Http\Controllers\TransaksiController::class, 'addToCart']);
     Route::post('/cartremove/{id}', [App\Http\Controllers\CartOfflineController::class, 'removeCart']);
@@ -244,7 +276,21 @@ Route::group(['middleware' => ['auth', 'ceklevel:SUPERADMIN,SUPERCEO,ADMIN,CEO,S
 
     Route::get('/pelanggan/list-pelanggan', [App\Http\Controllers\PelangganController::class, 'listPelanggan']);
     Route::get('/cari-pelanggan/{name}', [App\Http\Controllers\PelangganController::class, 'cariPelanggan']);
-  
+    //Aset
+    Route::get('/aset', [App\Http\Controllers\AsetController::class, 'index']);
+    Route::post('/asetTable', [App\Http\Controllers\AsetController::class, 'index']);
+    Route::post('/aset/simpan', [App\Http\Controllers\AsetController::class, 'store']);
+    Route::get('/aset/{id}/edit', [App\Http\Controllers\AsetController::class, 'edit']);
+    Route::delete('/aset/{id}', [App\Http\Controllers\AsetController::class, 'destroy']);
+    Route::get('/aset/kode', [App\Http\Controllers\AsetController::class, 'kode']);
+
+
+    Route::get('/pajak', [App\Http\Controllers\PajakController::class, 'index']);
+    Route::post('/pajakTable', [App\Http\Controllers\PajakController::class, 'index']);
+    Route::post('/pajak/simpan', [App\Http\Controllers\PajakController::class, 'store']);
+    Route::get('/pajak/{id}/edit', [App\Http\Controllers\PajakController::class, 'edit']);
+    Route::delete('/pajak/{id}', [App\Http\Controllers\PajakController::class, 'destroy']);
+
     //Stock
     Route::get('/stock', [App\Http\Controllers\StockController::class, 'index']);
     Route::get('/stock/masuk', [App\Http\Controllers\StockController::class, 'stockJenis']);
@@ -390,6 +436,14 @@ Route::group(['middleware' => ['auth', 'ceklevel:SUPERADMIN,SUPERCEO,ADMIN,CEO,S
     Route::delete('/pengeluaran/{id}', [App\Http\Controllers\PengeluaranController::class, 'destroy']);
     Route::post('/pengeluaran/bulk-verifikasi/{aksi}', [App\Http\Controllers\PengeluaranController::class, 'bulkVerifikasi']);
 
+    Route::get('/bayarUpah', [App\Http\Controllers\BayarUpahController::class, 'index']);
+    Route::post('/bayarUpahTable', [App\Http\Controllers\BayarUpahController::class, 'index']);
+    Route::post('/bayarUpah/simpan', [App\Http\Controllers\BayarUpahController::class, 'store']);
+    Route::get('/bayarUpah/{id}/edit', [App\Http\Controllers\BayarUpahController::class, 'edit']);
+    Route::delete('/bayarUpah/{id}', [App\Http\Controllers\BayarUpahController::class, 'destroy']);
+    Route::post('/bayarUpah/bulk-verifikasi/{aksi}', [App\Http\Controllers\BayarUpahController::class, 'bulkVerifikasi']);
+    Route::post('/bayarUpah/cek-upah', [App\Http\Controllers\BayarUpahController::class, 'cekUpah']);
+
 
     Route::get('/transfer', [App\Http\Controllers\TransferController::class, 'index']);
     Route::post('/transferTable', [App\Http\Controllers\TransferController::class, 'index']);
@@ -413,6 +467,14 @@ Route::group(['middleware' => ['auth', 'ceklevel:SUPERADMIN,SUPERCEO,ADMIN,CEO,S
     Route::delete('/jurnal/{id}', [App\Http\Controllers\JurnalController::class, 'destroy']);
     Route::post('/jurnal/bulk-verifikasi/{aksi}', [App\Http\Controllers\JurnalController::class, 'bulkVerifikasi']);
 
+
+    Route::get('/pembayaran', [App\Http\Controllers\PembayaranController::class, 'index']);
+    Route::post('/pembayaranTable', [App\Http\Controllers\PembayaranController::class, 'index']);
+    Route::post('/pembayaran/simpan', [App\Http\Controllers\PembayaranController::class, 'store']);
+    Route::get('/pembayaran/{id}/edit', [App\Http\Controllers\PembayaranController::class, 'edit']);
+    Route::delete('/pembayaran/{id}', [App\Http\Controllers\PembayaranController::class, 'destroy']);
+    Route::post('/pembayaran/verifikasi-pembayaran/{id}', [App\Http\Controllers\PembayaranController::class, 'verifikasiPembayaran']);
+
     Route::get('/quotation', [App\Http\Controllers\QuotationController::class, 'index']);
     Route::post('/quotationTable', [App\Http\Controllers\QuotationController::class, 'index']);
     Route::post('/quotation/simpan', [App\Http\Controllers\QuotationController::class, 'store']);
@@ -420,6 +482,27 @@ Route::group(['middleware' => ['auth', 'ceklevel:SUPERADMIN,SUPERCEO,ADMIN,CEO,S
     Route::delete('/quotation/{id}', [App\Http\Controllers\QuotationController::class, 'destroy']);
     Route::get('/quotation/detail/{no}', [App\Http\Controllers\QuotationController::class, 'show']);
     Route::post('/quotation/kirim/{id}', [App\Http\Controllers\QuotationController::class, 'kirimEmail']);
+
+    Route::get('/invoice', [App\Http\Controllers\InvoiceController::class, 'index']);
+    Route::post('/invoiceTable', [App\Http\Controllers\InvoiceController::class, 'index']);
+    Route::post('/invoice/simpan', [App\Http\Controllers\InvoiceController::class, 'store']);
+    Route::get('/invoice/{id}/edit', [App\Http\Controllers\InvoiceController::class, 'edit']);
+    Route::delete('/invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'destroy']);
+    Route::get('/invoice/detail/{no}', [App\Http\Controllers\InvoiceController::class, 'show']);
+    Route::post('/invoice/kirim/{id}', [App\Http\Controllers\InvoiceController::class, 'kirimEmail']);
+
+
+    Route::get('/portofolio', [App\Http\Controllers\PortofolioController::class, 'index']);
+    Route::post('/portofolioTable', [App\Http\Controllers\PortofolioController::class, 'index']);
+    Route::post('/portofolio/simpan', [App\Http\Controllers\PortofolioController::class, 'store']);
+    Route::get('/portofolio/{id}/edit', [App\Http\Controllers\PortofolioController::class, 'edit']);
+    Route::delete('/portofolio/{id}', [App\Http\Controllers\PortofolioController::class, 'destroy']);
+
+    Route::get('/testimoni', [App\Http\Controllers\TestimoniController::class, 'index']);
+    Route::post('/testimoniTable', [App\Http\Controllers\TestimoniController::class, 'index']);
+    Route::post('/testimoni/simpan', [App\Http\Controllers\TestimoniController::class, 'store']);
+    Route::get('/testimoni/{id}/edit', [App\Http\Controllers\TestimoniController::class, 'edit']);
+    Route::delete('/testimoni/{id}', [App\Http\Controllers\TestimoniController::class, 'destroy']);
 
     //laporan
     Route::get('/laporan-transaksi', [App\Http\Controllers\LaporanController::class, 'view_laporan_transaksi']);
@@ -459,10 +542,31 @@ Route::group(['middleware' => ['auth', 'ceklevel:SUPERADMIN,SUPERCEO,ADMIN,CEO,S
     Route::get('/laporan-kas', [App\Http\Controllers\LaporanController::class, 'view_laporan_kas']);
     Route::get('/print-laporan-kas', [App\Http\Controllers\LaporanController::class, 'print_laporan_kas']);
 
+    Route::get('/kegiatan/calendar', [KegiatanController::class, 'calendar']);
+    Route::post('/kegiatan/action', [KegiatanController::class, 'action']);
+    Route::get('/kegiatan', [KegiatanController::class, 'index']);
+    Route::post('/kegiatan/table', [KegiatanController::class, 'index']);
+
+    Route::get('/presensi', [PresentsController::class, 'index']);
+    Route::post('/presensi/table', [PresentsController::class, 'index']);
+    // Route::group(['middleware' => ['ipcheck:' . config('absensi.ip_address')]], function () {
+    Route::patch('/presensi/{kehadiran}', [PresentsController::class, 'checkOut'])->name('kehadiran.check-out');
+    Route::post('/presensi/checkin', [PresentsController::class, 'checkIn'])->name('kehadiran.check-in');
+    // });
 
 
     Route::resource('roles', RoleController::class);
 
+    Route::post('/presensi/checkin-manual', [PresentsController::class, 'storeManual']);
+    Route::get('/presensi/{id}/edit', [App\Http\Controllers\PresentsController::class, 'edit']);
+    Route::delete('/presensi/{id}', [App\Http\Controllers\PresentsController::class, 'destroy']);
+
+    Route::get('/hari-kerja/calendar', [HariKerjaController::class, 'calendar']);
+    Route::post('/hari-kerja/simpan', [HariKerjaController::class, 'action']);
+    Route::get('/hari-kerja', [HariKerjaController::class, 'index']);
+    Route::post('/hari-kerja/table', [HariKerjaController::class, 'index']);
+    Route::get('/hari-kerja/{id}/edit', [HariKerjaController::class, 'edit']);
+    Route::delete('/hari-kerja/{id}', [HariKerjaController::class, 'destroy']);
 
     Route::get('/website/delete/{id}', [App\Http\Controllers\WebsiteController::class, 'destroy']);
     Route::get('/toko', [App\Http\Controllers\WebsiteController::class, 'index']);
@@ -477,7 +581,17 @@ Route::group(['middleware' => ['auth', 'ceklevel:SUPERADMIN,SUPERCEO,ADMIN,CEO,S
     Route::get('up', function () {
         \Artisan::call('up');
     });
+    Route::get('/menu', [App\Http\Controllers\MenuController::class, 'index']);
+    Route::post('/menuTable', [App\Http\Controllers\MenuController::class, 'index']);
+    Route::post('/menuTableTrash', [App\Http\Controllers\MenuController::class, 'trashTable']);
+    Route::post('/menu/simpan', [App\Http\Controllers\MenuController::class, 'store']);
+    Route::get('/menu/{id}/edit', [App\Http\Controllers\MenuController::class, 'edit']);
+    Route::get('/menu/trash/{id}', [App\Http\Controllers\MenuController::class, 'trash']);
+    Route::get('/menu/delete/{id}', [App\Http\Controllers\MenuController::class, 'delete']);
+    Route::get('/menu/restore/{id}', [App\Http\Controllers\MenuController::class, 'restore']);
+    Route::get('/menu/bulk-delete', [App\Http\Controllers\MenuController::class, 'bulkDelete']);
 
+ 
 
     //User
     Route::get('/user', [App\Http\Controllers\UserController::class, 'index']);
@@ -497,17 +611,49 @@ Route::group(['middleware' => ['auth', 'ceklevel:SUPERADMIN,SUPERCEO,ADMIN,CEO,S
     Route::post('/update-pengaturan-transaksi', [App\Http\Controllers\WebsiteController::class, 'updatePengaturan']);
 });
 
+Route::get('/invoice/{id}', [App\Http\Controllers\TransaksiController::class, 'invoice']);
+Route::get('/invoicePrint/{id}', [App\Http\Controllers\TransaksiController::class, 'invoicePrint']);
+Route::get('/tanda-terima/{id}', [App\Http\Controllers\TransaksiController::class, 'tandaTerima']);
+Route::get('/tanda-terima-print/{id}', [App\Http\Controllers\TransaksiController::class, 'tandaTerimaPrint']);
 
 Route::get('{username}/produk/detail/{id}', [App\Http\Controllers\ProdukController::class, 'show']);
 Route::get('/produk-page', [App\Http\Controllers\ProdukController::class, 'produkPage']);
 Route::get('/produk-kategori/{id}', [App\Http\Controllers\ProdukController::class, 'produkKategori']);
 Route::get('/produk-cari/{id}', [App\Http\Controllers\ProdukController::class, 'produkCari']);
 
+Route::get('/how-to-order', function () {
+    return view('website.howtoorder');
+});
+
+Route::resource('categories', App\Http\Controllers\CategoryController::class);
+Route::resource('tags', App\Http\Controllers\TagController::class);
+
+// Manage Posts
+Route::get('posts/trash', [App\Http\Controllers\PostController::class, 'trash'])->name('posts.trash');
+Route::post('posts/trash/{id}/restore', [App\Http\Controllers\PostController::class, 'restore'])->name('posts.restore');
+Route::delete('posts/{id}/delete-permanent', [App\Http\Controllers\PostController::class, 'deletePermanent'])->name('posts.deletePermanent');
+Route::resource('posts', App\Http\Controllers\PostController::class);
+Route::get('category/{category:slug}', [App\Http\Controllers\FrontController::class, 'category'])->name('category');
+Route::get('tag/{tag:slug}', [App\Http\Controllers\FrontController::class, 'tag'])->name('tag');
+
+Route::get('/blog', [App\Http\Controllers\FrontController::class, 'index'])->name('homepage');
+Route::get('post/{slug}', [App\Http\Controllers\FrontController::class, 'show'])->name('show');
+
+Route::get('/testimoni-page', [App\Http\Controllers\TestimoniController::class, 'show']);
+//Notification Controllers
 Route::post('send', [PushNotificationController::class, 'bulksend'])->name('bulksend');
 Route::get('all-notifications', [PushNotificationController::class, 'index']);
 Route::get('get-notification-form', [PushNotificationController::class, 'create']);
 Route::post('/save-token', [App\Http\Controllers\PushNotificationController::class, 'saveToken'])->name('save-token');
 Route::get('/send-notification', [App\Http\Controllers\PushNotificationController::class, 'sendNotification'])->name('send.notification');
+
+Route::get('/cart', [CartController::class, 'cartList'])->name('cart.list');
+Route::get('/cart/add/{id}', [CartController::class, 'addToCart']);
+Route::post('/cart/update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('/remove', [CartController::class, 'removeCart'])->name('cart.remove');
+Route::post('/clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
+Route::get('/tax', [CartController::class, 'tax']);
+
 
 Route::get('/ongkir', [CheckOngkirController::class, 'index']);
 Route::post('/ongkir', [CheckOngkirController::class, 'check_ongkir']);
@@ -520,7 +666,51 @@ Route::post('/ongkir/kabupaten/select', [CheckOngkirController::class, 'kabupate
 Route::post('/ongkir/kecamatan/select', [CheckOngkirController::class, 'kecamatanSelect']);
 Route::get('/ongkir/get-expedisi', [CheckOngkirController::class, 'getExpedisi']);
 Route::post('/ongkir/costs', [CheckOngkirController::class, 'costs']);
+Route::post('/transaksi/checkout', [TransaksiController::class, 'checkout']);
+Route::get('/checkout', [CartController::class, 'checkout']);
+Route::post('/cart/add-ongkir', [CartController::class, 'addOngkir']);
+
+Route::get('/kabupaten/{id}', [App\Http\Controllers\TransaksiController::class, 'getKabupaten']);
+Route::get('/kecamatan/{id}', [App\Http\Controllers\TransaksiController::class, 'getKecamatan']);
+Route::get('/desa/{id}', [App\Http\Controllers\TransaksiController::class, 'getDesa']);
+
+
+Route::get('/xendit', [XenditController::class, 'index']);
+Route::get('/xendit/create-invoice', [XenditController::class, 'createInvoice']);
+Route::get('/xendit/report', [XenditController::class, 'getReport']);
+
+
+Route::get('/transaksi/confirs/{id}', [TransaksiController::class, 'confirs']);
+Route::get('/transaksi/failed/{id}', [TransaksiController::class, 'failed']);
+Route::get('/transaksi/proses-page', [TransaksiController::class, 'prosesPage']);
+Route::get('/transaksi/detail/{id}', [TransaksiController::class, 'detailTransaksi']);
+Route::get('/transaksi/cek-transaksi', [TransaksiController::class, 'vCekTransaksi']);
+
+
+Route::get('/produk/search-with-view/{produk_name}', [App\Http\Controllers\ProdukController::class, 'getWithView']);
+
+Route::post('/produk/get-harga-jual', [App\Http\Controllers\ProdukController::class, 'getHargaJual']);
+
+Route::get('/index', [App\Http\Controllers\FrontController::class, 'eshop']);
+
+Route::get('/terlaris', [App\Http\Controllers\OrderController::class, 'terlaris']);
+
+
+Route::get('/produk/list', [App\Http\Controllers\ProdukController::class, 'produkList']);
+
+
+// Route::get('/saldo', [App\Http\Controllers\XenditController::class, 'saldo']);
+// Route::get('/setCallBack', [App\Http\Controllers\XenditController::class, 'setCallBack']);
+
+Route::get('/pembayaran/bukti-bayar', [App\Http\Controllers\PembayaranController::class, 'buktiBayar']);
+Route::post('/pembayaran/bayar', [App\Http\Controllers\PembayaranController::class, 'store']);
 
 
 Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
+Route::get('/kasir', [KasirController::class, 'index']);
+
+Route::get('/xendit/ewallet', [XenditController::class, 'ewallet']);
+
+Route::get('/invoice/tagihan-xendit/{id}', [InvoiceController::class, 'createInvoiceXendit']);

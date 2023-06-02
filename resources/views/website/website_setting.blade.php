@@ -100,8 +100,8 @@
                                     </div>
                                     <div class="col-12 col-lg-6">
                                         <div class="mb-2">
-                                            <label for="email" class="control-label">Email</label>
-                                            <input type="text" class="form-control" id="email" name="email" value="{{ $website->email }}">
+                                            <label for="email" class="control-label">Email <span style="color: red;">*</span></label>
+                                            <input type="email" class="form-control" id="email" name="email" required value="{{ $website->email }}">
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-6">

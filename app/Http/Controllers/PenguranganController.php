@@ -240,7 +240,7 @@ class PenguranganController extends Controller
             }
         });
         session()->forget('cart');
-        return redirect('/pengurangan')->with(['alert' => 'success', 'message' => 'Data Berhasi Disimpan']);
+        return redirect('/pengurangan')->with(['alert' => 'success', 'message' => 'Data Berhasil Disimpan']);
     }
 
     public function kode()
@@ -402,7 +402,7 @@ class PenguranganController extends Controller
             }
         });
         session()->forget('cart');
-        return redirect('/pengurangan')->with(['alert' => 'success', 'message' => 'Data Berhasi Diperbarui']);
+        return redirect('/pengurangan')->with(['alert' => 'success', 'message' => 'Data Berhasil Diperbarui']);
     }
 
     /**

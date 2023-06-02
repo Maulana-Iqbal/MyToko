@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
-            <h4 class="page-title">Purchase Order</h4>
+            <h4 class="page-title">Pesanan Pembelian</h4>
         </div>
         <form action="{{url('preorder/store')}}" method="post">
             @csrf
@@ -25,7 +25,7 @@
                         </div>
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="mb-2">
-                                <label for="nota">No. Purchase Order <span style="color: red;">*</span></label>
+                                <label for="nota">No. Pesanan Pembelian <span style="color: red;">*</span></label>
                                 <input type="text" name="nota" id="nota" required class="form-control">
                             </div>
                         </div>

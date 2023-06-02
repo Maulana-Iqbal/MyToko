@@ -29,6 +29,7 @@ class StockTransfer extends Model
     public function ke_gudang(){
     	return $this->belongsTo(Gudang::class,'ke');
     }
+
     
 
 }

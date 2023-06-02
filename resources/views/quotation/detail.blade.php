@@ -42,17 +42,17 @@
                             <p class="font-13"><strong>No. Penawaran: </strong> <span class="badge bg-success float-end">{{strtoupper($quotation->no_quo)}}</span></p>
                             <p class="font-13"><strong>Berlaku Hingga: </strong> <span class="float-end">{{tglIndo($quotation->tgl_kedaluwarsa)}}</span></p>
                             <p class="font-13"><strong>Status: </strong> <span class="float-end">
-                                @if($quotation->status==0)
-                                Draft
-                                @elseif($quotation->status==1)
-                                Dikirim
-                                @elseif($quotation->status==2)
-                                Disetujui
-                                @elseif($quotation->status==3)
-                                Ditolak / Dibatalkan
-                                @elseif($quotation->status==4)
-                                Kedaluwarsa
-                                @endif
+                                    @if($quotation->status==0)
+                                    Draft
+                                    @elseif($quotation->status==1)
+                                    Dikirim
+                                    @elseif($quotation->status==2)
+                                    Disetujui
+                                    @elseif($quotation->status==3)
+                                    Ditolak / Dibatalkan
+                                    @elseif($quotation->status==4)
+                                    Kedaluwarsa
+                                    @endif
                                 </span>
                             </p>
                         </div>
@@ -154,12 +154,7 @@
 
                 <div class="row">
                     <div class="col-sm-4">
-                        <div class="clearfix">
-                            <h6 class="text-muted">Catatan:</h6>
-                            <small>
-                                {!!$quotation->catatan!!}
-                            </small>
-                        </div>
+
                     </div>
                     <div class="col-sm-4">
                         <div class="float-end mt-3 mt-sm-0">
@@ -176,7 +171,7 @@
                                     $pphRp = ($transaksi->total_biaya / 100) * $transaksi->pph;
                                     echo uang($pphRp);
                                     ?>
-                                    ({{$transaksi->pph}}%)
+                                    ({{$transaksi->pph}}%) (-)
                                 </span></p>
 
                         </div>
@@ -200,7 +195,12 @@
                         <br><br>
                         <table border="0" width="100%" align="center" cellpadding="3" cellspacing="0">
                             <tr>
-                                <td width="50%" align="center"></td>
+                                <td width="50%" valign="top">
+                                    <h6 class="text-muted">Catatan:</h6>
+                                    <small>
+                                        {!!$quotation->catatan!!}
+                                    </small>
+                                </td>
                                 <td width="50%" align="center">
                                     Hormat Kami,<br><br>
                                     TTD

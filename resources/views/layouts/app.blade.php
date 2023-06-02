@@ -278,74 +278,54 @@
                         </a>
                     </li>
 
-
+                    @if(auth()->user()->can('pembelian') or auth()->user()->can('pembelian-list') or auth()->user()->can('transaksi') or auth()->user()->can('transaksi-list'))
                     <li class="side-nav-title side-nav-item">Transaksi</li>
                     @if(auth()->user()->can('pembelian') or auth()->user()->can('pembelian-list'))
                     <li class="side-nav-item">
                         <a href="/pembelian" class="side-nav-link">
-                            <i class="mdi mdi-cart-plus"></i>
+                            <i class="mdi mdi-cash-minus"></i>
                             <span> Pembelian </span>
                         </a>
                     </li>
                     @endif
-                    <!-- @if(auth()->user()->can('penjualan') or auth()->user()->can('penjualan-list'))
-                    <li class="side-nav-item">
-                        <a href="/penjualan" class="side-nav-link">
-                            <i class="mdi mdi-table"></i>
-                            <span> Penjualan</span>
-                        </a>
-                    </li>
-                    @endif -->
                     @if(auth()->user()->can('transaksi') or auth()->user()->can('transaksi-list'))
                     <li class="side-nav-item">
                         <a href="/transaksi" class="side-nav-link">
-                            <i class="mdi mdi-cart-check"></i>
+                            <i class="mdi mdi-cash-check"></i>
                             <span> Penjualan</span>
                         </a>
                     </li>
                     @endif
+                    @endif
                     <li class="side-nav-title side-nav-item">Transaksi Lain</li>
+                    @if(auth()->user()->can('preorder') or auth()->user()->can('preorder-list'))
                     <li class="side-nav-item">
                         <a href="/preorder" class="side-nav-link">
                             <i class="mdi mdi-cart-arrow-up"></i>
-                            <span> Purchase Order</span>
+                            <span> Pesanan Pembelian</span>
                         </a>
                     </li>
+                    @endif
+                    @if(auth()->user()->can('quotation') or auth()->user()->can('quotation-list'))
                     <li class="side-nav-item">
                         <a href="/quotation" class="side-nav-link">
                             <i class="mdi mdi-cart-arrow-up"></i>
                             <span> Penawaran</span>
                         </a>
                     </li>
+                    @endif
+                    @if(auth()->user()->can('invoice') or auth()->user()->can('invoice-list'))
                     <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebar-pengurangan" aria-expanded="false" aria-controls="sidebar-pengurangan" class="side-nav-link">
-                            <i class="mdi mdi-cart-remove"></i>
-                            <span> Pengurangan</span>
-                            <span class="menu-arrow"></span>
+                        <a href="/invoice" class="side-nav-link">
+                            <i class="mdi mdi-cart-arrow-up"></i>
+                            <span> Tagihan Pembayaran</span>
                         </a>
-                        <div class="collapse" id="sidebar-pengurangan">
-                            <ul class="side-nav-second-level">
-                                @if(auth()->user()->can('pengurangan') or auth()->user()->can('pengurangan-list'))
-                                <li>
-                                    <a href="/pengurangan">
-                                        <i class="uil-circle"></i>
-                                        <span> Data Pengurangan</span>
-                                    </a>
-                                </li>
-                                @endif
-                                @if(auth()->user()->can('stock') or auth()->user()->can('stock-pengurangan'))
-                                <li>
-                                    <a href="/stock/pengurangan-stock">
-                                        <i class="uil-circle"></i>
-                                        <span> Item Pengurangan </span>
-                                    </a>
-                                </li>
-                                @endif
-                            </ul>
-                        </div>
                     </li>
+                    @endif
 
-
+                    @if(auth()->user()->can('stocktransfer') or auth()->user()->can('stocktransfer-list') or auth()->user()->can('stock') or auth()->user()->can('stock-transfer') or auth()->user()->can('pengurangan') or auth()->user()->can('pengurangan-list') or auth()->user()->can('stock') or auth()->user()->can('stock-pengurangan'))
+                    <li class="side-nav-title side-nav-item">Mutasi</li>
+                    @if(auth()->user()->can('stocktransfer') or auth()->user()->can('stocktransfer-list') or auth()->user()->can('stock') or auth()->user()->can('stock-transfer'))
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebar-stock-transfer" aria-expanded="false" aria-controls="sidebar-stock-transfer" class="side-nav-link">
                             <i class="mdi mdi-cart-arrow-right"></i>
@@ -376,7 +356,38 @@
                             </ul>
                         </div>
                     </li>
-
+                    @endif
+                    @if(auth()->user()->can('pengurangan') or auth()->user()->can('pengurangan-list') or auth()->user()->can('stock') or auth()->user()->can('stock-pengurangan'))
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebar-pengurangan" aria-expanded="false" aria-controls="sidebar-pengurangan" class="side-nav-link">
+                            <i class="mdi mdi-cart-remove"></i>
+                            <span> Pengurangan</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebar-pengurangan">
+                            <ul class="side-nav-second-level">
+                                @if(auth()->user()->can('pengurangan') or auth()->user()->can('pengurangan-list'))
+                                <li>
+                                    <a href="/pengurangan">
+                                        <i class="uil-circle"></i>
+                                        <span> Data Pengurangan</span>
+                                    </a>
+                                </li>
+                                @endif
+                                @if(auth()->user()->can('stock') or auth()->user()->can('stock-pengurangan'))
+                                <li>
+                                    <a href="/stock/pengurangan-stock">
+                                        <i class="uil-circle"></i>
+                                        <span> Item Pengurangan </span>
+                                    </a>
+                                </li>
+                                @endif
+                            </ul>
+                        </div>
+                    </li>
+                    @endif
+                    @endif
+                    @if(auth()->user()->can('stock') or auth()->user()->can('stock-list') or auth()->user()->can('stock') or auth()->user()->can('stock-gudang') or auth()->user()->can('stock') or auth()->user()->can('stock-masuk') or auth()->user()->can('stock') or auth()->user()->can('stock-keluar'))
                     <li class="side-nav-title side-nav-item">Stock Barang</li>
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarStock" aria-expanded="false" aria-controls="sidebarStock" class="side-nav-link">
@@ -425,6 +436,7 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
                     <li class="side-nav-title side-nav-item">Akuntansi</li>
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebar-akun" aria-expanded="false" aria-controls="sidebar-akun" class="side-nav-link">

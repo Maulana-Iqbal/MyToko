@@ -101,8 +101,7 @@ class KasBankService
                 ->addColumn('action', function ($row) use ($type) {
                     if ($type == 1) {
                         $btn = "";
-                            $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . enc($row->id) . '" data-original-title="Edit" class="edit btn btn-outline-primary btn-xs editKasBank"> <i class="mdi mdi-square-edit-outline"></i></a>';
-
+                            // $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . enc($row->id) . '" data-original-title="Edit" class="edit btn btn-outline-primary btn-xs editKasBank"> <i class="mdi mdi-square-edit-outline"></i></a>';
                             $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . enc($row->id) . '" data-status="trash" data-original-title="Delete" class="btn btn-outline-danger btn-xs deleteKasBank"> <i class="mdi mdi-delete"></i></a>';
 
                         return $btn;

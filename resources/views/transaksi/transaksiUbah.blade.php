@@ -217,7 +217,7 @@
                                     <tr>
                                         <td>PPH</td>
                                         <td>:</td>
-                                        <td align="right"><span class="pph">Rp. 0</span><small>(+)</small></td>
+                                        <td align="right"><span class="pph">Rp. 0</span><small>(-)</small></td>
                                     </tr>
                                     <tr>
                                         <td>Diskon</td>
@@ -386,7 +386,7 @@
             if (totalBiaya > 0 && pph > 0) {
                 pphRp = (parseFloat(totalBiaya) / 100) * pph;
             }
-            total = (parseFloat(totalHarga) + parseFloat(totalBiaya) + parseFloat(ppnRp) + parseFloat(pphRp) + parseFloat(biayaLain) + parseFloat(pengiriman)) - parseFloat(diskon);
+            total = (parseFloat(totalHarga) + parseFloat(totalBiaya) + parseFloat(ppnRp)  + parseFloat(biayaLain) + parseFloat(pengiriman)) - parseFloat(pphRp) - parseFloat(diskon);
             total = Math.round(total);
 
             $(".ppn").html(formatRupiah(ppnRp));

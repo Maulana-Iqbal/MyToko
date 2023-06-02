@@ -143,7 +143,6 @@
                                 <th>Total</th>
                                 <th class="text-wrap">Metode Bayar</th>
                                 <th>Status</th>
-                                <th>Deskripsi</th>
                                 <th>Toko</th>
                                 <th>Aksi</th>
                             </tr>

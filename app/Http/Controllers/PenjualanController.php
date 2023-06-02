@@ -279,7 +279,7 @@ class PenjualanController extends Controller
             }
         });
         session()->forget('cart');
-        return redirect('/penjualan')->with(['alert' => 'success', 'message' => 'Data Berhasi Disimpan']);
+        return redirect('/penjualan')->with(['alert' => 'success', 'message' => 'Data Berhasil Disimpan']);
     }
 
     public function kode()
@@ -391,7 +391,7 @@ class PenjualanController extends Controller
             $d['bayar'] = $jumlahBayar;
             $this->stockOrderRepo->update($request->id, $d);
 
-            return redirect('/penjualan')->with(['alert' => 'success', 'message' => 'Data Berhasi Diperbarui']);
+            return redirect('/penjualan')->with(['alert' => 'success', 'message' => 'Data Berhasil Diperbarui']);
         }
         if (!session('cart')) {
             return redirect()->back()->with(['alert' => 'error', 'message' => 'Data Produk Masih Kosong']);
@@ -464,7 +464,7 @@ class PenjualanController extends Controller
             }
         });
         session()->forget('cart');
-        return redirect('/penjualan')->with(['alert' => 'success', 'message' => 'Data Berhasi Diperbarui']);
+        return redirect('/penjualan')->with(['alert' => 'success', 'message' => 'Data Berhasil Diperbarui']);
     }
 
     /**

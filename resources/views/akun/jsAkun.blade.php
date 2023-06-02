@@ -153,6 +153,16 @@
             $('#saveBtn').html("Simpan");
             $('#id_akun').val('');
             $('#akunForm').trigger("reset");
+            $("#kategori_akun_id").select2("trigger", "select", {
+                    data: {
+                        id: '',
+                    }
+                });
+                $("#induk").select2("trigger", "select", {
+                    data: {
+                        id: '',
+                    }
+                });
             $('#modelHeading').html("Tambah Akun");
             $('#ajaxModel').modal('show');
         });
@@ -237,7 +247,12 @@
         });
 
         $('body').on('click', '.editAkun', function() {
-
+            $("#induk").select2("trigger", "select", {
+                    data: {
+                        id: '',
+                        text: ''
+                    }
+                });
             var id_akun = $(this).data('id_akun');
             $("#canvasloading").show();
             $("#loading").show();
@@ -250,9 +265,18 @@
                 $('#id_akun').val(data.id);
                 $('#kode').val(data.kode);
                 $('#name').val(data.name);
-                $('select[name="kategori_akun_id"]').val(data.kategori_akun_id);
                 $('select[name="tipe"]').val(data.tipe);
-                $('select[name="induk"]').val(data.induk);
+                $("#kategori_akun_id").select2("trigger", "select", {
+                    data: {
+                        id: data.kategori_akun_id,
+                    }
+                });
+                $("#induk").select2("trigger", "select", {
+                    data: {
+                        id: data.induk,
+                        text: data.kategori_akun.name
+                    }
+                });
             })
 
         });
@@ -444,44 +468,37 @@
                 });
         });
 
-
-        $("body").on("change", "#kategori_akun_id", function() {
-            var id = $(this).val();
-            getInduk(id);
+        $("#kategori_akun_id").select2({
+            placeholder: 'Pilih Kategori Akun',
+            allowClear: true,
+            dropdownParent: $('#ajaxModel .modal-body'),
         });
 
-
-        function getInduk(id = '') {
-            $.ajax({
+        $("#induk").select2({
+            placeholder: 'Pilih Detail Dari',
+            allowClear: true,
+            dropdownParent: $('#ajaxModel .modal-body'),
+            ajax: {
                 url: "/akun/select-kategori",
                 type: "post",
-                data: {
-                    id: id
-                },
                 dataType: 'json',
-                success: function(params) {
-                    $('#induk').empty();
-                    $("#induk").select2({
-                        placeholder: {
-                            id: '', // the value of the option
-                            text: 'Pilih'
-                        },
-                        dropdownParent: $('#ajaxModel .modal-body'),
-                        allowClear: true,
-                        // dropdownParent: $('#newPelanggan .modal-body'),
+                delay: 250,
+                data: function(params) {
+                    return {
                         //    _token: CSRF_TOKEN,
-                        data: params // search term
-                    });
-                    // $("#induk").select2("trigger", "select", {
-                    //     data: {
-                    //         id: id
-                    //     }
-                    // });
+                        search: params.term,
+                        id:$("#kategori_akun_id").val() // search term
+                    };
                 },
-            });
-        }
+                processResults: function(response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            }
 
-
+        });
 
         // $('.chosen-select').chosen({width: "100%"});
     });

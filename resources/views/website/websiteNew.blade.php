@@ -70,8 +70,8 @@
                                 </div>
 
                                 <div class="mb-2">
-                                    <label for="email" class="control-label">Email</label>
-                                    <input type="text" class="form-control" id="email" name="email">
+                                    <label for="email" class="control-label">Email <span style="color: red;">*</span></label>
+                                    <input type="email" class="form-control" id="email" required name="email">
                                 </div>
                             </div>
                             <div class="col-lg-6">

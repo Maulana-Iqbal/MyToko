@@ -9,59 +9,59 @@
 
         load_data();
 
-function load_data(from_date = '', to_date = '', website = '') {
-  var table=$('#datatable').DataTable({
-            processing: true,
-            serverSide: true,
-            responsive: true,
-            retrieve: true,
-            paging: true,
-            destroy: true,
-            "scrollX": false,
-            ajax: {
-                url: "{{ url('/kasBankTable') }}",
-                type: "POST",
+        function load_data(from_date = '', to_date = '', website = '') {
+            var table = $('#datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                responsive: true,
+                retrieve: true,
+                paging: true,
+                destroy: true,
+                "scrollX": false,
+                ajax: {
+                    url: "{{ url('/kasBankTable') }}",
+                    type: "POST",
                     data: {
                         from_date: from_date,
                         to_date: to_date,
                         website: website,
                     }
 
-            },
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex',
-                    orderable: false,
-                    searchable: false
                 },
-                {
-                    data: 'tipe',
-                    name: 'tipe'
-                },
-                {
-                    data: 'kode',
-                    name: 'kode'
-                },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'kategori',
-                    name: 'kategori'
-                },
-                {
-                    data: 'saldo',
-                    name: 'saldo'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
-        });
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'tipe',
+                        name: 'tipe'
+                    },
+                    {
+                        data: 'kode',
+                        name: 'kode'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'kategori',
+                        name: 'kategori'
+                    },
+                    {
+                        data: 'saldo',
+                        name: 'saldo'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            });
             table.draw();
         }
 
@@ -127,24 +127,24 @@ function load_data(from_date = '', to_date = '', website = '') {
             dropdownParent: $('#ajaxModel  .modal-body')
         });
         $('#filter').click(function() {
-                var from_date = $('#from_date').val();
-                var to_date = $('#to_date').val();
-                var website = $('#website').val();
+            var from_date = $('#from_date').val();
+            var to_date = $('#to_date').val();
+            var website = $('#website').val();
 
-                $('#datatable').DataTable().destroy();
-                load_data(from_date, to_date, website);
-                $("#print").val('Print');
-                $("#export").val('Export');
+            $('#datatable').DataTable().destroy();
+            load_data(from_date, to_date, website);
+            $("#print").val('Print');
+            $("#export").val('Export');
 
-            });
+        });
 
-            $('#refresh').click(function() {
-                $('#from_date').val('');
-                $('#to_date').val('');
-                $('#website').val('');
-                $('#datatable').DataTable().destroy();
-                load_data();
-            });
+        $('#refresh').click(function() {
+            $('#from_date').val('');
+            $('#to_date').val('');
+            $('#website').val('');
+            $('#datatable').DataTable().destroy();
+            load_data();
+        });
 
 
 
@@ -436,66 +436,66 @@ function load_data(from_date = '', to_date = '', website = '') {
 
 
         $("#akun").select2({
-                placeholder: {
-                            id: '', // the value of the option
-                            text: 'Pilih Akun'
-                        },
-                            allowClear: true,
-                dropdownParent: $('#ajaxModel .modal-body'),
-                ajax: {
-                    url: "/akun/select",
-                    type: "post",
-                    dataType: 'json',
-                    delay: 250,
-                    data: function(params) {
-                        return {
-                            //    _token: CSRF_TOKEN,
-                            search: params.term // search term
-                        };
-                    },
-                    processResults: function(response) {
-                        return {
-                            results: response
-                        };
-                    },
-                    cache: true
-                }
+            placeholder: {
+                id: '', // the value of the option
+                text: 'Pilih Akun'
+            },
+            allowClear: true,
+            dropdownParent: $('#ajaxModel .modal-body'),
+            ajax: {
+                url: "/akun/select",
+                type: "post",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        //    _token: CSRF_TOKEN,
+                        search: params.term // search term
+                    };
+                },
+                processResults: function(response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            }
 
-            });
+        });
 
 
-            function getAkun(id = '') {
-                $.ajax({
-                    url: "/akun/select",
-                    type: "post",
-                    dataType: 'json',
-                    success: function(params) {
-                        $('#akun').empty();
-                        $("#akun").select2({
-                            dropdownParent: $('#ajaxModel .modal-body'),
-                            placeholder: {
+        function getAkun(id = '') {
+            $.ajax({
+                url: "/akun/select",
+                type: "post",
+                dataType: 'json',
+                success: function(params) {
+                    $('#akun').empty();
+                    $("#akun").select2({
+                        dropdownParent: $('#ajaxModel .modal-body'),
+                        placeholder: {
                             id: '', // the value of the option
                             text: 'Pilih'
                         },
-                            allowClear: true,
-                            // dropdownParent: $('#newPelanggan .modal-body'),
-                            //    _token: CSRF_TOKEN,
-                            data: params // search term
-                        });
-                        $("#akun").select2("trigger", "select", {
-                            data: {
-                                id: id
-                            }
-                        });
-                    },
-                });
-            }
-
-
-        $("body").on("change","#akun",function(){
-
-                getInduk(11);
+                        allowClear: true,
+                        // dropdownParent: $('#newPelanggan .modal-body'),
+                        //    _token: CSRF_TOKEN,
+                        data: params // search term
+                    });
+                    $("#akun").select2("trigger", "select", {
+                        data: {
+                            id: id
+                        }
+                    });
+                },
             });
+        }
+
+
+        $("body").on("change", "#akun", function() {
+
+            getInduk(11);
+        });
 
         function getInduk(id = '') {
             $.ajax({

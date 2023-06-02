@@ -13,7 +13,7 @@ use Image;
 
 class TransferController extends Controller
 {
-
+protected $kasRepo;
     public function __construct()
     {
         $this->kasRepo = new KasRepositori();
@@ -239,7 +239,7 @@ class TransferController extends Controller
      */
     public function edit($id)
     {
-        $transfer = Transfer::find($id);
+        $transfer = Transfer::where('id',$id)->with('akun')->with('akun_dari')->first();
         return response()->json($transfer);
     }
 

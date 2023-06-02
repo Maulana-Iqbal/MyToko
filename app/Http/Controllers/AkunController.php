@@ -80,7 +80,7 @@ class AkunController extends Controller
     public function edit($id)
     {
         $id = dec($id);
-        $akun = $this->akunRepo->getId($id);
+        $akun = $this->akunRepo->getWhere(['id'=>$id])->with('kategori_akun')->first();
         return response()->json($akun);
     }
 

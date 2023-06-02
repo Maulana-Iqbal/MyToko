@@ -55,5 +55,13 @@ class StockOrder extends Model
     public function shipping(){
     	return $this->hasOne(Shipping::class,'transaksi_id','id');
     }
+    
+    public function xeninvoice(){
+    	return $this->hasOne(Xeninvoice::class,'transaksi_id','id');
+    }
+
+    public function invoice(){
+    	return $this->hasOne(Invoice::class,'nomor','nomor');
+    }
 
 }

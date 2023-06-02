@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purchase Order {{strtoupper($data->nomor)}}</title>
+    <title>Pesanan Pembelian {{strtoupper($data->nomor)}}</title>
     <style>
         body {
             width: 100%;
@@ -46,14 +46,16 @@
                     <span class="font-13"><strong>Perusahaan: </strong> {{$data->pemasok->perusahaan}}</span><br>
                     <span class="font-13"><strong>Nama: </strong> {{$data->pemasok->nama}}</span><br>
                     <span class="font-13"><strong>Alamat: </strong> {{$data->pemasok->alamat}}</span><br>
-                    <span class="font-13"><strong>HP: </strong> {{$data->pemasok->telepon}}</span>
+                    <span class="font-13"><strong>HP: </strong> {{$data->pemasok->telepon}}</span><br>
+                    <span class="font-13"><strong>Email: </strong> {{$data->pemasok->email}}</span>
                 </td>
                 <td>
                     <h4>Dikirim Ke :</h4>
                 <span class="font-13"><strong>Toko: </strong> {{website($data->website_id)->nama_website}}</span><br>
                     <span class="font-13"><strong>Alamat: </strong> {{website($data->website_id)->webkecamatan->name}}, {{website($data->website_id)->webkota->name}}<br>
                         {{website($data->website_id)->webprovinsi->name}}, {{website($data->website_id)->pos}}</span><br>
-                    <span class="font-13"><strong>HP: </strong> {{website($data->website_id)->contact}}</span>
+                    <span class="font-13"><strong>HP: </strong> {{website($data->website_id)->contact}}</span><br>
+                    <span class="font-13"><strong>Email: </strong> {{website($data->website_id)->email}}</span>
                 </td>
             </tr>
         </table>

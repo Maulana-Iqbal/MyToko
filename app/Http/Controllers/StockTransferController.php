@@ -675,7 +675,7 @@ class StockTransferController extends Controller
             }
         });
         session()->forget('cart');
-        return redirect('/stock-transfer')->with(['alert' => 'success', 'message' => 'Data Berhasi Diperbarui']);
+        return redirect('/stock-transfer')->with(['alert' => 'success', 'message' => 'Data Berhasil Diperbarui']);
     }
 
     /**

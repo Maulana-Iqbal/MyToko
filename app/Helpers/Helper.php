@@ -4,6 +4,7 @@ use App\Http\Controllers\XenditController;
 use App\Models\Aset;
 use App\Models\Gudang;
 use App\Models\HariKerja;
+use App\Models\Invoice;
 use App\Models\Notifikasi;
 use App\Models\Website;
 use App\Models\Menu;
@@ -16,6 +17,7 @@ use App\Models\Quotation;
 use App\Models\Rekening;
 use App\Models\Sales;
 use App\Models\Stock;
+use App\Models\StockJenis;
 use App\Models\StockOrder;
 use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
@@ -237,6 +239,17 @@ function createCodeQuotation()
         $no_quo = $cek_kode->no_quo + 1;
     }
     return $no_quo;
+}
+
+function createCodeInvoice()
+{
+    $cek_kode = Invoice::latest()->first();
+    if (empty($cek_kode->no_inv)) {
+        $no = 1000;
+    } else {
+        $no = $cek_kode->no_inv + 1;
+    }
+    return $no;
 }
 
 function createCodeProduct()
@@ -891,5 +904,79 @@ function totalToko()
     }
 
     $data = Website::where($q)->count();
+    return $data;
+}
+
+function totalProduk($website=null)
+{
+    if (auth()->user()->hasPermissionTo('show-all')) {
+        $q = null;
+       
+    } else {
+        $q = ['website_id' => website()->id];
+    }
+
+    if($website){
+        $q=['website_id' => $website];
+    }
+
+    $data = Produk::where($q)->count();
+    return $data;
+}
+
+function totalStock($website=null)
+{
+    if (auth()->user()->hasPermissionTo('show-all')) {
+        $q = null;
+        
+    } else {
+        $q = ['website_id' => website()->id];
+    }
+
+    if($website){
+        $q=['website_id' => $website];
+    }
+
+    $data = Stock::where($q)->sum('jumlah');
+    return $data;
+}
+
+function totalStockTerjual($website=null)
+{
+    if (auth()->user()->hasPermissionTo('show-all')) {
+        $q = null;
+        
+    } else {
+        $q = ['website_id' => website()->id];
+    }
+
+    if($website){
+        $q=['website_id' => $website];
+    }
+
+    $data = StockJenis::where($q)
+    ->where('valid',1)
+    ->where('jenis',2)
+    ->sum('jumlah');
+    return $data;
+}
+
+function totalStockHapus($website=null)
+{
+    if (auth()->user()->hasPermissionTo('show-all')) {
+        $q = null;
+        
+    } else {
+        $q = ['website_id' => website()->id];
+    }
+
+    if($website){
+        $q=['website_id' => $website];
+    }
+
+    $data = StockJenis::where($q)
+    ->where('valid',1)
+    ->where('jenis',3)
+    ->sum('jumlah');
     return $data;
 }

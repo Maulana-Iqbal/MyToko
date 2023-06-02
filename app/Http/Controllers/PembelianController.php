@@ -268,7 +268,7 @@ class PembelianController extends Controller
             }
         });
         session()->forget('cart');
-        return redirect('/pembelian')->with(['alert' => 'success', 'message' => 'Data Berhasi Disimpan']);
+        return redirect('/pembelian')->with(['alert' => 'success', 'message' => 'Data Berhasil Disimpan']);
     }
 
     public function kode()
@@ -431,7 +431,7 @@ class PembelianController extends Controller
             }
         });
         session()->forget('cart');
-        return redirect('/pembelian')->with(['alert' => 'success', 'message' => 'Data Berhasi Diperbarui']);
+        return redirect('/pembelian')->with(['alert' => 'success', 'message' => 'Data Berhasil Diperbarui']);
     }
 
     /**

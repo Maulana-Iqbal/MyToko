@@ -7,10 +7,10 @@
         <div class="page-title-box">
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item active">Purchase Order</li>
+                    <li class="breadcrumb-item active">Pesanan Pembelian</li>
                 </ol>
             </div>
-            <h4 class="page-title">Detail Purchase Order</h4>
+            <h4 class="page-title">Detail Pesanan Pembelian</h4>
         </div>
     </div>
 </div>
@@ -27,7 +27,7 @@
                         <img src="{{url('image/website/'.website()->icon)}}" alt="" height="30">
                     </div> -->
                     <div class="float-start">
-                        <h4 class="m-0 d-print-none">Detail Purchase Order</h4>
+                        <h4 class="m-0 d-print-none">Detail Pesanan Pembelian</h4>
                     </div>
                 </div>
 
@@ -54,7 +54,8 @@
                         <span class="font-13"><strong>Perusahaan: </strong> {{$data->pemasok->perusahaan}}</span><br>
                         <span class="font-13"><strong>Nama: </strong> {{$data->pemasok->nama}}</span><br>
                         <span class="font-13"><strong>Alamat: </strong> {{$data->pemasok->alamat}}</span><br>
-                        <span class="font-13"><strong>HP: </strong> {{$data->pemasok->telepon}}</span>
+                        <span class="font-13"><strong>HP: </strong> {{$data->pemasok->telepon}}</span><br>
+                        <span class="font-13"><strong>Email: </strong> {{$data->pemasok->email}}</span>
 
                     </div>
                     <div class="col-sm-4">
@@ -62,7 +63,8 @@
                         <span class="font-13"><strong>Toko: </strong> {{website($data->website_id)->nama_website}}</span><br>
                         <span class="font-13"><strong>Alamat: </strong> {{website($data->website_id)->webkecamatan->name}}, {{website($data->website_id)->webkota->name}}<br>
                             {{website($data->website_id)->webprovinsi->name}}, {{website($data->website_id)->pos}}</span><br>
-                        <span class="font-13"><strong>HP: </strong> {{website($data->website_id)->contact}}</span>
+                        <span class="font-13"><strong>HP: </strong> {{website($data->website_id)->contact}}</span><br>
+                        <span class="font-13"><strong>Email: </strong> {{website($data->website_id)->email}}</span>
                     </div>
 
                  <div class="col-sm-4"></div>

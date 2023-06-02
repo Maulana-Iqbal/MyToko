@@ -131,8 +131,8 @@
     </table>
     <table border="0" width="100%" align="center" cellpadding="3" cellspacing="0">
         <tr>
-            <td valign="top">{!!$quotation->catatan!!}</td>
-            <td valign="top">
+            <td valign="top"></td>
+            <td align="right" valign="top">
                 <p><b>Sub Total : </b> <span class="float-end">{{uang($transaksi->order_total)}}</span></p>
                 <p><b>PPN: </b> <span class="float-end">
                         <?php
@@ -146,10 +146,10 @@
                         $pphRp = ($transaksi->total_biaya / 100) * $transaksi->pph;
                         echo uang($pphRp);
                         ?>
-                        ({{$transaksi->pph}}%)
+                        ({{$transaksi->pph}}%) (-)
                     </span></p>
             </td>
-            <td valign="top">
+            <td align="right" valign="top">
                 <p><b>Pengiriman : </b> <span class="float-end">{{uang($transaksi->pengiriman)}}</span></p>
                 <p><b>Biaya Lain : </b> <span class="float-end">{{uang($transaksi->biaya_lain)}}</span></p>
                 <p><b>Diskon : </b> <span class="float-end">{{uang($transaksi->diskon)}} (-)</span></p>
@@ -163,7 +163,9 @@
     {!!$quotation->penutup!!}
     <table border="0" width="100%" align="center" cellpadding="3" cellspacing="0">
         <tr>
-            <td width="50%" align="center"></td>
+            <td width="50%" valign="top">
+            {!!$quotation->catatan!!}
+            </td>
             <td width="50%" align="center">
                 Hormat Kami,<br><br>
                 TTD

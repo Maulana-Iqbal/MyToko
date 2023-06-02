@@ -80,6 +80,42 @@ if ($tpendapatan > 0 and $tpembelian > 0) {
             </div>
         </form>
     </div>
+    <div class="col-6 col-sm-6 col-lg-3">
+        <div class="card tilebox-one">
+            <div class="card-body">
+                <i class="uil uil-users-alt float-end"></i>
+                <h3 class="text-uppercase mt-0 font-14">Pengguna @can('show-all')<small>(by filter)</small>@endcan</h3>
+                <h2 class="my-2" id="active-users-count">{{$totalPengguna}}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-sm-6 col-lg-3">
+        <div class="card tilebox-one">
+            <div class="card-body">
+                <i class="uil uil-users-alt float-end"></i>
+                <h3 class="text-uppercase mt-0 font-14">Customer @can('show-all')<small>(by filter)</small>@endcan</h3>
+                <h2 class="my-2" id="active-users-count">{{$totalCustomer}}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-sm-6 col-lg-3">
+        <div class="card tilebox-one">
+            <div class="card-body">
+                <i class="uil uil-users-alt float-end"></i>
+                <h3 class="text-uppercase mt-0 font-14">Sales @can('show-all')<small>(by filter)</small>@endcan</h3>
+                <h2 class="my-2" id="active-users-count">{{$totalSales}}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-sm-6 col-lg-3">
+        <div class="card tilebox-one">
+            <div class="card-body">
+                <i class="uil uil-users-alt float-end"></i>
+                <h3 class="text-uppercase mt-0 font-14">Supplier @can('show-all')<small>(by filter)</small>@endcan</h3>
+                <h2 class="my-2" id="active-users-count">{{$totalSupplier}}</h2>
+            </div>
+        </div>
+    </div>
     <div class="col-12">
         <div class="card widget-inline">
             <div class="card-header">
@@ -158,55 +194,6 @@ if ($tpendapatan > 0 and $tpembelian > 0) {
             </div>
         </div> <!-- end card-box-->
     </div> <!-- end col-->
-
-
-
-
-    <!-- <div class="col-lg-3">
-        <div class="card tilebox-one">
-            <div class="card-body">
-                <i class="uil uil-users-alt float-end"></i>
-                <h6 class="text-uppercase mt-0">Toko</h6>
-                <h2 class="my-2" id="active-users-count">{{$totalToko}}</h2>
-            </div>
-        </div>
-    </div> -->
-    <div class="col-6 col-sm-6 col-lg-3">
-        <div class="card tilebox-one">
-            <div class="card-body">
-                <i class="uil uil-users-alt float-end"></i>
-                <h3 class="text-uppercase mt-0 font-14">Pengguna @can('show-all')<small>(by filter)</small>@endcan</h3>
-                <h2 class="my-2" id="active-users-count">{{$totalPengguna}}</h2>
-            </div>
-        </div>
-    </div>
-    <div class="col-6 col-sm-6 col-lg-3">
-        <div class="card tilebox-one">
-            <div class="card-body">
-                <i class="uil uil-users-alt float-end"></i>
-                <h3 class="text-uppercase mt-0 font-14">Customer @can('show-all')<small>(by filter)</small>@endcan</h3>
-                <h2 class="my-2" id="active-users-count">{{$totalCustomer}}</h2>
-            </div>
-        </div>
-    </div>
-    <div class="col-6 col-sm-6 col-lg-3">
-        <div class="card tilebox-one">
-            <div class="card-body">
-                <i class="uil uil-users-alt float-end"></i>
-                <h3 class="text-uppercase mt-0 font-14">Sales @can('show-all')<small>(by filter)</small>@endcan</h3>
-                <h2 class="my-2" id="active-users-count">{{$totalSales}}</h2>
-            </div>
-        </div>
-    </div>
-    <div class="col-6 col-sm-6 col-lg-3">
-        <div class="card tilebox-one">
-            <div class="card-body">
-                <i class="uil uil-users-alt float-end"></i>
-                <h3 class="text-uppercase mt-0 font-14">Supplier @can('show-all')<small>(by filter)</small>@endcan</h3>
-                <h2 class="my-2" id="active-users-count">{{$totalSupplier}}</h2>
-            </div>
-        </div>
-    </div>
 </div>
 
 <div class="row">
@@ -284,6 +271,43 @@ if ($tpendapatan > 0 and $tpembelian > 0) {
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6 col-sm-6 col-lg-3">
+        <div class="card tilebox-one">
+            <div class="card-body">
+                <!-- <i class="uil uil-users-alt float-end"></i> -->
+                <h3 class="text-uppercase mt-0 font-14">Total Produk</h3>
+                <h2 class="my-2" id="active-users-count">{{totalProduk()}}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-sm-6 col-lg-3">
+        <div class="card tilebox-one">
+            <div class="card-body">
+                <!-- <i class="uil uil-users-alt float-end"></i> -->
+                <h3 class="text-uppercase mt-0 font-14">Total Stock</h3>
+                <h2 class="my-2" id="active-users-count">{{totalStock()}}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-sm-6 col-lg-3">
+        <div class="card tilebox-one">
+            <div class="card-body">
+                <!-- <i class="uil uil-users-alt float-end"></i> -->
+                <h3 class="text-uppercase mt-0 font-14">Total Terjual</h3>
+                <h2 class="my-2" id="active-users-count">{{totalStockTerjual()}}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-sm-6 col-lg-3">
+        <div class="card tilebox-one">
+            <div class="card-body">
+                <!-- <i class="uil uil-users-alt float-end"></i> -->
+                <h3 class="text-uppercase mt-0 font-14">Total Pengurangan Stock</h3>
+                <h2 class="my-2" id="active-users-count">{{totalStockHapus()}}</h2>
             </div>
         </div>
     </div>

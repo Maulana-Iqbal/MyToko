@@ -30,7 +30,6 @@
 
                     <div class="card">
                         <div class="card-body">
-                            @if (auth()->user()->level == 'STAFF' or auth()->user()->level == 'ADMIN')
                                 <div class="mb-2">
                                     <button type="button" id="createNewRekening" class="btn btn-primary"
                                         data-bs-toggle="modal" data-bs-target="#success-header-modal"><i
@@ -40,7 +39,6 @@
                                         class="btn btn-outline-danger float-end">Hapus
                                         Pilihan</button>
                                 </div>
-                            @endif
                             <div class="table-responsive">
                                 <table id="datatable" class="table table-centered w-100 dt-responsive  table-striped">
                                     <thead>

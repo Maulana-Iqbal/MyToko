@@ -137,7 +137,7 @@
                     </div>
 
                     <div class="mb-2 pemasok-group">
-                        <label for="perusahaan" class="col-sm-3 control-label">Nama Perusahaan</label>
+                        <label for="perusahaan" class="col-sm-3 control-label">Nama Perusahaan <span style="color: red;">*</span></label>
 
                         <input type="text" class="form-control" id="perusahaan" name="perusahaan" placeholder="Masukkan Nama Perusahaan" required="">
 
@@ -145,7 +145,7 @@
 
 
                     <div class="mb-2 pemasok-group">
-                        <label for="email" class="col-sm-3 control-label">Email</label>
+                        <label for="email" class="col-sm-3 control-label">Email <span style="color: red;">*</span></label>
 
                         <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email Supplier">
 

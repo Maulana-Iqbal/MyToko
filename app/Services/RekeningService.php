@@ -88,20 +88,19 @@ class RekeningService
                 ->addColumn('action', function ($row) use ($type) {
                     if ($type == 1) {
                         $btn = "";
-                        if (auth()->user()->level == 'STAFF' or auth()->user()->level == 'ADMIN') {
+                       
                             $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id_rekening="' . enc($row->id) . '" data-original-title="Edit" class="edit btn btn-outline-primary btn-xs editRekening"> <i class="mdi mdi-square-edit-outline"></i></a>';
 
                             $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id_rekening="' . enc($row->id) . '" data-status="trash" data-original-title="Delete" class="btn btn-outline-danger btn-xs deleteRekening"> <i class="mdi mdi-delete"></i></a>';
-                        }
-
+                       
                         return $btn;
                     } else {
                         $btn = "";
-                        if (auth()->user()->level == 'STAFF' or auth()->user()->level == 'ADMIN') {
+                      
 
                             $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id_rekening="' . enc($row->id) . '" data-original-title="Restore" class="btn btn-outline-primary restoreRekening"> Restore</a>';
                             $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id_rekening="' . enc($row->id) . '" data-status="delete" data-original-title="Hapus" class="btn btn-outline-danger deleteRekening"> Permanent Delete</a>';
-                        }
+                      
 
                         return $btn;
                     }

@@ -109,7 +109,7 @@ if (isset($pdf)) {
                                     <td align="center">Total Biaya</td>
                                     <td align="center">Sub Total</td>
                                     <td align="center">PPN</td>
-                                    <td align="center">PPH</td>
+                                    <td align="center">PPH (-)</td>
                                     <td align="center">Pengiriman</td>
                                     <td align="center">Biaya Lain</td>
                                     <td align="center">Diskon (-)</td>
@@ -136,7 +136,7 @@ if (isset($pdf)) {
                                         if ($p->pph) {
                                             $pphRp = ($p->total_biaya / 100) * $p->pph;
                                         }
-                                        echo uang($pphRp) . ' (' . $p->pph . '%)';
+                                        echo uang($pphRp) . ' (' . $p->pph . '%) (-)';
                                         ?>
                                     </td>
                                     <td align="right">{{uang($p->pengiriman)}}</td>
@@ -174,7 +174,7 @@ if (isset($pdf)) {
                                         <th><b>Total Biaya</b><br>{{uang($tTotalBiaya)}}</th>
                                         <th><b>Sub Total</b><br>{{uang($orderTotal)}}</th>
                                         <th><b>PPN</b><br>{{uang($ppnTotal)}}</th>
-                                        <th><b>PPH</b><br>{{uang($pphTotal)}}</th>
+                                        <th><b>PPH</b><br>{{uang($pphTotal)}} (-)</th>
                                         <th><b>Pengiriman</b><br>{{uang($pengirimanTotal)}}</th>
                                         <th><b>Biaya Lain</b><br>{{uang($tBiayaLain)}}</th>
                                         <th><b>Diskon</b><br>{{uang($diskonTotal)}} (-)</th>
@@ -191,7 +191,7 @@ if (isset($pdf)) {
         <b>PPN :</b> (Total Harga / 100) X PPN<br>
         <b>PPN :</b> (Total Biaya / 100) X PPH<br>
         <b>Sub Total :</b> Total Harga + Total Biaya <br>
-        <b>Total :</b> (Sub Total + PPN + PPH + Pengiriman + Biaya Lain) - Diskon
+        <b>Total :</b> (Sub Total + PPN + Pengiriman + Biaya Lain) - PPH - Diskon
     </div>
     @if(isset($print))
     <script>

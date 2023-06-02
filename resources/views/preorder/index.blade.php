@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
-            <h4 class="page-title">Purchase Order</h4>
+            <h4 class="page-title">Pesanan Pembelian</h4>
         </div>
     </div>
 </div>
@@ -65,7 +65,7 @@
                                         </div>
                                         
                                         <div class="col-sm-4 col-12">
-                                            <label for="status-order">Status Purchase Order</label>
+                                            <label for="status-order">Status Pesanan Pembelian</label>
                                             <select multiple name="status_order[]" id="status-order" class="form-control">
                                                <option value="proses">Proses</option>
                                                <option value="dikirim">Dikirim</option>

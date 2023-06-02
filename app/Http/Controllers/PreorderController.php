@@ -75,7 +75,7 @@ class PreorderController extends Controller
             return Datatables::of($preorder)
                 ->addIndexColumn()
                 ->addColumn('nomor', function ($row) {
-                    $nomor = '<a href="' . url("preorder/detail/") . $row->nomor . '" class="text-body fw-bold">' . $row->nomor . '</a>';
+                    $nomor = '<a href="' . url("preorder/detail/" . $row->nomor ). '" class="text-body fw-bold">' . $row->nomor . '</a>';
                     return $nomor;
                 })
                 ->addColumn('tgl', function ($row) {
@@ -319,7 +319,7 @@ class PreorderController extends Controller
                 $save = $this->stockOrderRepo->store($d);
                 if ($save) {
                     if ($request->status_order == 'dikirim') {
-                        $this->kirimEmail($save);
+                        $this->kirimEmail($request,$save);
                     } else {
                         $this->createPdf($save);
                     }
@@ -329,7 +329,7 @@ class PreorderController extends Controller
             }
         });
         session()->forget('cart');
-        return redirect('/preorder')->with(['alert' => 'success', 'message' => 'Data Berhasi Disimpan']);
+        return redirect('/preorder')->with(['alert' => 'success', 'message' => 'Data Berhasil Disimpan']);
     }
 
     public function kode()
@@ -459,7 +459,7 @@ class PreorderController extends Controller
                 $save = $this->stockOrderRepo->update($request->id, $d);
                 if ($save) {
                     if ($request->status_order == 'dikirim') {
-                        $this->kirimEmail($request->id);
+                        $this->kirimEmail($request,$request->id);
                     } else {
                         $this->createPdf($request->id);
                     }
@@ -469,7 +469,7 @@ class PreorderController extends Controller
             }
         });
         session()->forget('cart');
-        return redirect('/preorder')->with(['alert' => 'success', 'message' => 'Data Berhasi Diperbarui']);
+        return redirect('/preorder')->with(['alert' => 'success', 'message' => 'Data Berhasil Diperbarui']);
     }
 
     /**
