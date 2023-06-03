@@ -124,7 +124,11 @@ class ProdukService
             $data['website_id'] = website()->id;
 
             $query = $produk->update($data);
-            QrCode::format('svg')->size(60)->generate($request->kode_produk, 'image/produk/qr' . '/' . $id . '.svg');
+            $path='image/produk/qr';
+            if (!file_exists($path)) {
+                mkdir($path, 755, true);
+            }
+            QrCode::format('svg')->size(60)->generate($request->kode_produk, $path . '/' . $id . '.svg');
             $response = [
                 'success' => true,
                 'message' => 'Berhasil Disimpan.',
