@@ -320,7 +320,7 @@ class TransaksiController extends Controller
 
     public function show($nomor)
     {
-        $data = $this->stockOrderRepo->getWhere(['nomor' => $nomor])->with('xeninvoice')->first();
+        $data = $this->stockOrderRepo->getWhere(['nomor' => $nomor])->first();
         return view('transaksi.detail', compact('data'));
     }
 
@@ -440,7 +440,7 @@ class TransaksiController extends Controller
             }
 
             if ($valid == 1) {
-                $this->validOrder($d['nomor']);
+                $this->validOrder($save);
             }
         });
         session()->forget('cart');
@@ -1033,7 +1033,7 @@ class TransaksiController extends Controller
     public function validOrder($id)
     {
         $response = DB::transaction(function () use ($id) {
-            $penjualan = $this->stockOrderRepo->getId($id)->first();
+            $penjualan = $this->stockOrderRepo->getWhere(['id'=>$id])->first();
             foreach ($penjualan->stock_jenis as $p) {
                 $produkId = $p->produk_id;
                 $gudangId = $p->gudang_id;

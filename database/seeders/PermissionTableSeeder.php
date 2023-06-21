@@ -34,7 +34,9 @@ class PermissionTableSeeder extends Seeder
             'stocktransfer',
             'stock',
             'preorder',
-            'transaksi'
+            'transaksi',
+            'quotation',
+            'invoice'
         ];
 
         foreach ($permissions as $permission) {
